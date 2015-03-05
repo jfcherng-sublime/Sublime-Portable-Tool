@@ -1,74 +1,112 @@
-@echo OFF
-title Sublime Text 便携版工具包
-echo.
-echo.               Sublime Text 便携版工具包 说  明 @LOO2K
-echo -----------------------------------------------------------------------
-echo   操作序号：
-echo   1: 添加 Sublime Text 到系统右键菜单;
-echo   2: 卸载 Sublime Text 右键菜单;
-echo   3: 注册扩展名; (扩展名列表请存放至同目录的 ext.txt 文件中)
-echo   4: 卸载扩展名：
-echo   5: 退出;
-echo.
-echo   注意事项：
-echo   1. 请将此脚本复制到 Sublime Text 的文件夹；
-echo   2. 确保 Sublime Text 的可执行文件名为 sublime_text.exe；
-echo   3. 请将需要绑定的扩展名保存到同目录 ext.txt 文件中；（每行一个扩展名）
-echo.
-echo -----------------------------------------------------------------------
-:begin
-Set /p u=输入操作序号并按 Enter 键：
-
-If "%u%" == "1" Goto regMenu
-If "%u%" == "2" Goto unregMenu
-If "%u%" == "3" Goto st2file
-If "%u%" == "4" Goto unst2file
-If "%u%" == "5" exit
-If "%u%" == ""  Goto begin
-
-:regMenu
-reg add "HKCR\*\shell\Sublime Text 2" /ve /d "Open With Sublime Text" /f
-reg add "HKCR\*\shell\Sublime Text 2\command" /ve /d "%cd%\sublime_text.exe %%1" /f
-echo.
-echo 已成功注册右键菜单
-echo.
-Goto begin
-
-:unregMenu
-reg delete "HKCR\*\shell\Sublime Text 2" /f
-echo.
-echo 已成功卸载右键菜单
-echo.
-Goto begin
-
-:st2file
-reg add "HKCR\st2file" /ve /d "文本文档" /f
-reg add "HKCR\st2file\DefaultIcon" /ve /d "%cd%\sublime_text.exe" /f
-reg add "HKCR\st2file\shell\open\command" /ve /d "%cd%\sublime_text.exe %%1" /f
-For /F "eol=;" %%e in (ext.txt) Do (
-        Rem echo %%e
-        (for /f "skip=2 tokens=1,2,* delims= " %%a in ('reg query "HKCR\.%%e" /ve') do (
-            If NOT "%%c" == "st2file" (
-                reg add "HKCR\.%%e" /v "st2_backup" /d "%%c" /f
-            )
-        ))
-        assoc .%%e=st2file
-    )
-echo.
-echo 已成功注册扩展名
-echo.
-Goto begin
-
-:unst2file
-reg delete "HKCR\st2file" /f
-For /F "eol=;" %%e in (ext.txt) Do (
-        Rem echo %%e
-        (for /f "skip=2 tokens=1,2,* delims= " %%a in ('reg query "HKCR\.%%e" /v "st2_backup"') do (
-            reg add "HKCR\.%%e" /ve /d "%%c" /f
-            reg delete "HKCR\.%%e" /V "st2_backup" /f
-        ))
-    )
-echo.
-echo 已成功卸载扩展名
-echo.
-Goto begin
+@ECHO OFF
+TITLE Sublime Text Portable Tool
+CALL :get_last_arg %*
+SET "CURRENT_DIR=%LAST_ARG%"
+SET "TEMP_DIR=%CD%"
+SET PATH=%TEMP_DIR%;%PATH%
+CD /D %CURRENT_DIR%
+
+ECHO.
+ECHO       Sublime Text 獽拟ㄣ @LOO2K  羉いて〓эjfcherng     
+ECHO ----------------------------------------------------------------------------
+ECHO.
+ECHO   巨腹
+ECHO   1: 睰 Sublime Text ╰参龄匡虫 (icon_menu.ico)
+ECHO   2: 簿埃 Sublime Text 龄匡虫
+ECHO   3: 睰捌郎闽羛 (icon_doc.ico, 捌郎叫ヘ魁 ext.txt 郎い)
+ECHO   4: 簿埃捌郎闽羛
+ECHO   5: 传 Sublime Text 祘Α瓜ボ icon_program.ico
+ECHO   6: 瞒秨
+ECHO.
+ECHO   猔種ㄆ兜
+ECHO   1. 叫盢竲セ狡籹 Sublime Text 戈Ж
+ECHO   2. 絋粄 Sublime Text 磅︽郎 sublime_text.exe
+ECHO   3. 叫盢惠璶竕﹚捌郎玂ヘ魁 ext.txt 郎い–︽捌郎
+ECHO.
+ECHO ----------------------------------------------------------------------------
+
+
+:begin
+SET /p u=块巨腹 Enter 龄
+IF "%u%" == "1" GOTO regMenu
+IF "%u%" == "2" GOTO unregMenu
+IF "%u%" == "3" GOTO sublime_text_file
+IF "%u%" == "4" GOTO un_sublime_text_file
+IF "%u%" == "5" GOTO change_program_icon
+IF "%u%" == "6" EXIT
+GOTO begin
+
+
+:regMenu
+reg add "HKCR\*\shell\Sublime Text" /ve /d " Sublime Text 秨币" /f 
+reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%cd%\icon_menu.ico" /f
+REM reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%cd%\sublime_text.exe,0" /f
+reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%cd%\sublime_text.exe ""%%1""" /f 
+ECHO.
+ECHO Θ睰龄匡虫
+ECHO.
+GOTO begin
+
+
+:unregMenu
+reg delete "HKCR\*\shell\Sublime Text" /f
+ECHO.
+ECHO Θ簿埃龄匡虫
+ECHO.
+GOTO begin
+
+
+:sublime_text_file
+reg add "HKCR\sublime_text_file" /ve /d "Sublime Text file" /f
+reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%cd%\icon_doc.ico" /f
+reg add "HKCR\sublime_text_file\shell\open\command" /ve /d "%cd%\sublime_text.exe ""%%1""" /f
+FOR /F "eol=;" %%e IN (ext.txt) DO (
+	REM ECHO %%e
+	reg query "HKCR\.%%e" > NUL || reg add "HKCR\.%%e" /f
+	FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /ve') DO (
+		IF NOT "%%c" == "sublime_text_file" (
+			reg add "HKCR\.%%e" /v "sublime_text_backup" /d "%%c" /f
+		)
+	)
+	assoc .%%e=sublime_text_file
+)
+ECHO.
+ECHO Θ睰捌郎
+ECHO.
+GOTO begin
+
+
+:un_sublime_text_file
+reg delete "HKCR\sublime_text_file" /f
+FOR /F "eol=;" %%e IN (ext.txt) DO (
+	REM ECHO %%e
+	reg query "HKCR\.%%e" /v "sublime_text_backup" > NUL || reg add "HKCR\.%%e" /ve /f
+	FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /v "sublime_text_backup"') DO (
+		reg add "HKCR\.%%e" /ve /d "%%c" /f
+		reg delete "HKCR\.%%e" /V "sublime_text_backup" /f
+	)
+)
+ECHO.
+ECHO Θ簿埃捌郎
+ECHO.
+GOTO BEGIN
+
+
+:change_program_icon
+ResHacker.exe -addoverwrite "sublime_text.exe", "sublime_text.exe", "icon_program.ico", ICONGROUP, MAINICON, 0
+@DEL /F ResHacker.ini
+@DEL /F ResHacker.log
+REM try to clean icon cache
+@ie4uinit.exe -ClearIconCache
+@DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db
+ECHO.
+ECHO Θ传祘Α瓜ボ
+ECHO.
+GOTO BEGIN
+
+
+:get_last_arg
+  SET "LAST_ARG=%~1"
+  SHIFT
+  IF NOT "%~1"=="" GOTO get_last_arg
+GOTO :EOF

@@ -1,11 +1,74 @@
-; æ¯è¡Œè¾“å…¥ä¸€ä¸ªæ‰©å±•å
-; æ¯è¡Œå‰é¢çš„åˆ†å·ä¸ºæ³¨é‡Šæ ‡è®°
-txt
+; ¨C¦æ¿é¤J¤@­Ó°ÆÀÉ¦W
+; ¨C¦æ«e­±ªº¤À¸¹¬°µù¸Ñ¼Ğ°O
+
+; C/C++
+c
+cpp
+h
+hpp
+hxx
+
+; R
+R
+
+; Arduino
+ino
+
+; Latex
+aux
+latex
+bib
+bbl
+blg
+bst
+cls
+ctx
+tex
+
+; Verilog
+v
+vh
+tcl
+setup
+
+; Spice
+sp
+cdl
+mdl
+cir
+mod
+scs
+spi
+
+; Shell script
+sh
+csh
+tcsh
+
+; Text
+md
+rst
+;txt
+;ini
+
+; Web
 ;html
 ;htm
+erb
+sass
+scss
 css
 js
+xml
+json
 php
 sql
-ini
-jade
+
+;py
+conf
+tpl
+
+; Subtitle
+srt
+ssa
+ass

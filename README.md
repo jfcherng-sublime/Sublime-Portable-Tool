@@ -1,40 +1,40 @@
-## 介绍
+## 介紹
 
-Sublime Text Portable Tool 是一个为 PC 下便携版的 Sublime Text 制作的一个 **增加文件关联以及右键菜单** 的工具，这里提供源代码，如果你可以看懂代码的话，你也可以根据我提供的代码为其他的程序制作一个增加文件关联以及右键菜单的工具。
+THIS IS A FORK FROM https://github.com/loo2k/Sublime-Text-Portable-Tool
+This fork is compiled by **Bat To Exe Converter**.
+ResHacker.exe is used and you can download it from http://www.angusj.com/resourcehacker if you want to compile **Sublime Text Portable Tool** by yourself.
 
-目前测试为 Sublime Text 2/3 在 Windows 7 系统下运行正常（请关闭 UAC 或者使用管理员权限打开），由于现在用 Winddows 比较少，其他版本的操作系统没有做详细的测试。如果有问题麻烦在 issue 中反馈一下。
+Sublime Text Portable Tool 是一個為 PC 下便攜版的 Sublime Text 製作的一個 **增加檔案關聯以及右鍵選單** 的工具。
 
-## 使用说明
+## 使用說明
 
-将 `Sublime-Text-Portable-Tool.bat` 和 `ext.txt` 两个文件复制到 Sublime Text 的文件夹中，并确保 Sublime Text 的可执行文件名称为 `sublime_text.exe` ，编辑好 `ext.txt` 后执行 `Sublime-Text-Portable-Tool.bat` 文件即可。 
+將 `Sublime-Text-Portable-Tool.bat` 和 `ext.txt` 兩個檔案複製到 Sublime Text 的資料夾中，並確保 Sublime Text 的可執行檔案名稱為 `sublime_text.exe` ，編輯好 `ext.txt` 後執行 `Sublime-Text-Portable-Tool.bat` 檔案即可。
 
-其中 **ext.txt** 文件中每行代表一个需要绑定的扩展名，如:
+其中 **ext.txt** 檔案中每行代表一個需要綁定的副檔名，如:
 
     txt
     html
     css
     js
-    
-如果你想注释该行的话可以使用 `;` 分号对该行进行注释，如：
 
-    ; 这行不会被识别
-    ; 因为以 ; 开头的行都会被忽略
+如果你想註釋該行的話可以使用 `;` 分號對該行進行註釋，如：
+
+    ; 這行不會被辨識
+    ; 因為以 ; 開頭的行都會被忽略
     txt
     html
     ;css
     ;js
 
-进行绑定扩展名或者右键菜单打开 `Sublime-Text-Portable-Tool.bat` 按照说明操作即可；
-
-更多说明可以到我的博客查看 [Sublime Text 2 便携版工具包](http://loo2k.com/blog/sublime-text-2-portable-version-tool/)
+進行綁定副檔名或者右鍵選單打開 `Sublime-Text-Portable-Tool.exe` 按照說明操作即可；
 
 ## DEMO
 
-运行界面：
+執行界面：
 
 ![](images/st2tool.png?raw=true)
 
-右键菜单：
+右鍵選單：
 
 ![](images/st2menu.png?raw=true)
 
