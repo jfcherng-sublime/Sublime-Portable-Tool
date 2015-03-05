@@ -1,8 +1,9 @@
 ## 介紹
 
 THIS IS A FORK FROM https://github.com/loo2k/Sublime-Text-Portable-Tool
-This fork is compiled by **Bat To Exe Converter**.
-ResHacker.exe is used and you can download it from http://www.angusj.com/resourcehacker if you want to compile **Sublime Text Portable Tool** by yourself.
+
+This fork is compiled by **Bat To Exe Converter** ( http://www.f2ko.de/programs.php?pid=b2e ).
+ResHacker.exe ( http://www.angusj.com/resourcehacker )is needed if you want to compile **Sublime Text Portable Tool** by yourself.
 
 Sublime Text Portable Tool 是一個為 PC 下便攜版的 Sublime Text 製作的一個 **增加檔案關聯以及右鍵選單** 的工具。
 
