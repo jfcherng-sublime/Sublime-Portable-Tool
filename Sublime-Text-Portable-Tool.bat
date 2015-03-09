@@ -6,28 +6,39 @@ SET "TEMP_DIR=%CD%"
 SET PATH=%TEMP_DIR%;%PATH%
 CD /D %CURRENT_DIR%
 
+SET VERSION=v1.0.2
 ECHO.
-ECHO       Sublime Text 便攜版工具包 @LOO2K  繁中化／修改：jfcherng     
-ECHO ----------------------------------------------------------------------------
+ECHO     Sublime Text Portable Tool @LOO2K  Fork/Modified by jfcherng@gmail.com    
+ECHO ------------------------------------------------------------------------------
 ECHO.
-ECHO   操作序號：
-ECHO   1: 添加 Sublime Text 到系統右鍵選單 (icon_menu.ico)
-ECHO   2: 移除 Sublime Text 右鍵選單
-ECHO   3: 添加副檔名關聯 (icon_doc.ico, 副檔名列表請存放至同目錄的 ext.txt 檔案中)
-ECHO   4: 移除副檔名關聯
-ECHO   5: 更換 Sublime Text 的主程式圖示為 icon_program.ico
-ECHO   6: 離開
+ECHO   Operations:
+ECHO   1: Add "Open with Sublime Text" to context menu (icon_menu.ico)
+ECHO   2: Remove "Open with Sublime Text" from context menu
+ECHO   3: Add file associations (ext.txt, icon_doc.ico)
+ECHO   4: Remove file associations
+ECHO   5: Change the icon of sublime_text.exe (icon_program.ico)
+ECHO   6: Exit
 ECHO.
-ECHO   注意事項：
-ECHO   1. 請將此腳本複製到 Sublime Text 的資料夾
-ECHO   2. 確認 Sublime Text 的可執行檔案名為 sublime_text.exe
-ECHO   3. 請將需要綁定的副檔名保存到同目錄 ext.txt 檔案中（每行一個副檔名）
+ECHO   Some notes:
+ECHO   1. Put this .exe file with sublime_text.exe.
+ECHO   2. Write file exetensions in ext.txt line by line
+ECHO                                                                         %VERSION%
+ECHO ------------------------------------------------------------------------------
 ECHO.
-ECHO ----------------------------------------------------------------------------
+
+
+:check_sublime_text_exist
+IF EXIST "sublime_text.exe" (
+    GOTO begin
+) ELSE (
+	ECHO I cannot find your sublime_text.exe... :(
+	PAUSE >NUL
+    EXIT
+)
 
 
 :begin
-SET /p u=輸入操作序號並按 Enter 鍵：
+SET /p u=What are you going to do? 
 IF "%u%" == "1" GOTO regMenu
 IF "%u%" == "2" GOTO unregMenu
 IF "%u%" == "3" GOTO sublime_text_file
@@ -38,20 +49,33 @@ GOTO begin
 
 
 :regMenu
-reg add "HKCR\*\shell\Sublime Text" /ve /d "以 Sublime Text 開啟" /f 
-reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%cd%\icon_menu.ico" /f
-REM reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%cd%\sublime_text.exe,0" /f
-reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%cd%\sublime_text.exe ""%%1""" /f 
+REM for files
+reg add "HKCR\*\shell\Sublime Text" /ve /d "Open with Sublime Text" /f 
+reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu.ico" /f
+reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
+REM for directories
+reg add "HKCR\Directory\shell\Sublime Text" /ve /d "Open with Sublime Text" /f 
+reg add "HKCR\Directory\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu.ico" /f
+reg add "HKCR\Directory\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
+REM for directories background
+reg add "HKCR\Directory\Background\shell\Sublime Text" /ve /d "Open with Sublime Text" /f 
+reg add "HKCR\Directory\Background\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu.ico" /f
+reg add "HKCR\Directory\Background\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
 ECHO.
-ECHO 已成功添加右鍵選單
+ECHO Done: add "Open with Sublime Text" to context menu
 ECHO.
 GOTO begin
 
 
 :unregMenu
+REM for files
 reg delete "HKCR\*\shell\Sublime Text" /f
+REM for directories
+reg delete "HKCR\Directory\shell\Sublime Text" /f
+REM for directories background
+reg delete "HKCR\Directory\Background\shell\Sublime Text" /f
 ECHO.
-ECHO 已成功移除右鍵選單
+ECHO Done: remove "Open with Sublime Text" from context menu
 ECHO.
 GOTO begin
 
@@ -71,7 +95,7 @@ FOR /F "eol=;" %%e IN (ext.txt) DO (
 	assoc .%%e=sublime_text_file
 )
 ECHO.
-ECHO 已成功添加副檔名
+ECHO Done: add file associations
 ECHO.
 GOTO begin
 
@@ -87,7 +111,7 @@ FOR /F "eol=;" %%e IN (ext.txt) DO (
 	)
 )
 ECHO.
-ECHO 已成功移除副檔名
+ECHO Done: remove file associations
 ECHO.
 GOTO BEGIN
 
@@ -100,7 +124,7 @@ REM try to clean icon cache
 @ie4uinit.exe -ClearIconCache
 @DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db
 ECHO.
-ECHO 已成功更換主程式圖示
+ECHO Done: change the icon of sublime_text.exe
 ECHO.
 GOTO BEGIN
 

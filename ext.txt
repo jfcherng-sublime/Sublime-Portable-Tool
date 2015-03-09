@@ -1,5 +1,4 @@
-; 每行輸入一個副檔名
-; 每行前面的分號為註解標記
+; a leading semicolon will comment the line
 
 ; C/C++
 c
