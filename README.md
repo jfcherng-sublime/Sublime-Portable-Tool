@@ -1,4 +1,4 @@
-# Sublime Text Portable Tool
+# Sublime Text/Merge Portable Tool
 
 This tool is developed to manage the context menu, file icons and file associations for Sublime Text/Merge under Windows.
 
@@ -21,7 +21,7 @@ To compile, just run
 ## Demo
 
 - [Open a file with Sublime Text](https://raw.githubusercontent.com/jfcherng/Sublime-Text-Portable-Tool/gh-pages/images/file.png)
-- [Open a directory with Sublime Text](https://raw.githubusercontent.com/jfcherng/Sublime-Text-Portable-Tool/gh-pages/images/dir.png)
+- [Open a directory with Sublime Text/Merge](https://raw.githubusercontent.com/jfcherng/Sublime-Text-Portable-Tool/gh-pages/images/dir.png)
 - [Change the icon of the executable](https://raw.githubusercontent.com/jfcherng/Sublime-Text-Portable-Tool/gh-pages/images/change_exe_icon.png)
 - [Set file associations and change file icons](https://raw.githubusercontent.com/jfcherng/Sublime-Text-Portable-Tool/gh-pages/images/change_file_icon.png)
 
