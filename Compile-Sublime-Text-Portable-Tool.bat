@@ -6,7 +6,7 @@ SET COMPILER=Bat To Exe Converter\Bat_To_Exe_Converter.exe
 SET INPUT_BASENAME=Sublime-Text-Portable-Tool
 SET DESC=A portable tool for Sublime Text
 SET ICON=icon_menu_st.ico
-SET VERSION=1.0.5.0
+SET VERSION=1.0.6.0
 SET GITHUB_REPO=https://github.com/jfcherng/Sublime-Portable-Tool
 
 CD /D src
