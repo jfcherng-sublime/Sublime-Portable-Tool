@@ -1,22 +1,22 @@
-Sublime Text Portable Tool
-==========================
+# Sublime Text Portable Tool
 
 This tool is developed to manage the context menu, file icons and file associations for Sublime Text under Windows.
 
 
-Acknowledgment
-==============
-
-This project is forked from [LOO2K](https://github.com/loo2k/Sublime-Text-Portable-Tool) and several functionalities are added.
+## Compilation
 
 To compile this project, you need the following things.
 
-- [Bat To Exe Converter](http://www.f2ko.de/programs.php?pid=b2e)
+- [Bat To Exe Converter](http://www.f2ko.de/en/b2e.php)
 - [ResHacker.exe](http://www.angusj.com/resourcehacker) (I use v3.6 for a smaller size.)
 
+To compile, just run
 
-Demo
-====
+- `Compile-Sublime-Text-Portable-Tool.bat`
+- `Compile-Sublime-Merge-Portable-Tool.bat`
+
+
+## Demo
 
 ![](https://raw.githubusercontent.com/jfcherng/Sublime-Text-Portable-Tool/gh-pages/images/stTool.png)
 
@@ -35,3 +35,8 @@ Demo
 - Set file associations and change file icons
 
   ![](https://raw.githubusercontent.com/jfcherng/Sublime-Text-Portable-Tool/gh-pages/images/change_file_icon.png)
+
+
+## Acknowledgment
+
+This project is forked from [LOO2K](https://github.com/loo2k/Sublime-Text-Portable-Tool) and several functionalities are added.
