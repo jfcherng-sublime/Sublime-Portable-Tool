@@ -1,6 +1,6 @@
 @ECHO OFF
 TITLE Sublime Text Portable Tool
-SET PATH=%TEMP%;%PATH%
+SET PATH=%b2eincfilepath%;%PATH%
 
 SET VERSION=v1.0.5
 ECHO.
