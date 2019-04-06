@@ -1,28 +1,24 @@
 @ECHO OFF
 TITLE Sublime Text Portable Tool
-CALL :get_last_arg %*
-SET "CURRENT_DIR=%LAST_ARG%"
-SET "TEMP_DIR=%CD%"
-SET PATH=%TEMP_DIR%;%PATH%
-CD /D %CURRENT_DIR%
+SET PATH=%TEMP%;%PATH%
 
-SET VERSION=v1.0.2
+SET VERSION=v1.0.3
 ECHO.
-ECHO     Sublime Text Portable Tool @LOO2K  Fork/Modified by jfcherng@gmail.com    
+ECHO Sublime Merge Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
 ECHO.
 ECHO   Operations:
-ECHO   1: Add "Open with Sublime Text" to context menu (icon_menu.ico)
+ECHO   1: Add "Open with Sublime Text" to context menu (icon_menu_st.ico)
 ECHO   2: Remove "Open with Sublime Text" from context menu
-ECHO   3: Add file associations (ext.txt, icon_doc.ico)
+ECHO   3: Add file associations (ext.txt, icon_doc_st.ico)
 ECHO   4: Remove file associations
-ECHO   5: Change the icon of sublime_text.exe (icon_program.ico)
+ECHO   5: Change the icon of sublime_text.exe (icon_program_st.ico)
 ECHO   6: Exit
 ECHO.
 ECHO   Some notes:
 ECHO   1. Put this .exe file with sublime_text.exe.
 ECHO   2. Write file exetensions in ext.txt line by line
-ECHO                                                                         %VERSION%
+ECHO.
 ECHO ------------------------------------------------------------------------------
 ECHO.
 
@@ -31,14 +27,14 @@ ECHO.
 IF EXIST "sublime_text.exe" (
     GOTO begin
 ) ELSE (
-	ECHO I cannot find your sublime_text.exe... :(
-	PAUSE >NUL
+    ECHO I cannot find your sublime_text.exe... :/
+    PAUSE >NUL
     EXIT
 )
 
 
 :begin
-SET /p u=What are you going to do? 
+SET /p u="What are you going to do? "
 IF "%u%" == "1" GOTO regMenu
 IF "%u%" == "2" GOTO unregMenu
 IF "%u%" == "3" GOTO sublime_text_file
@@ -50,17 +46,17 @@ GOTO begin
 
 :regMenu
 REM for files
-reg add "HKCR\*\shell\Sublime Text" /ve /d "Open with Sublime Text" /f 
-reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu.ico" /f
-reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
+reg add "HKCR\*\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
+reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
+reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%1""" /f
 REM for directories
-reg add "HKCR\Directory\shell\Sublime Text" /ve /d "Open with Sublime Text" /f 
-reg add "HKCR\Directory\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu.ico" /f
-reg add "HKCR\Directory\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
+reg add "HKCR\Directory\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
+reg add "HKCR\Directory\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
+reg add "HKCR\Directory\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%1""" /f
 REM for directories background
-reg add "HKCR\Directory\Background\shell\Sublime Text" /ve /d "Open with Sublime Text" /f 
-reg add "HKCR\Directory\Background\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu.ico" /f
-reg add "HKCR\Directory\Background\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
+REM reg add "HKCR\Directory\Background\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
+REM reg add "HKCR\Directory\Background\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
+REM reg add "HKCR\Directory\Background\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%1""" /f
 ECHO.
 ECHO Done: add "Open with Sublime Text" to context menu
 ECHO.
@@ -82,8 +78,8 @@ GOTO begin
 
 :sublime_text_file
 reg add "HKCR\sublime_text_file" /ve /d "Sublime Text file" /f
-reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%cd%\icon_doc.ico" /f
-reg add "HKCR\sublime_text_file\shell\open\command" /ve /d "%cd%\sublime_text.exe ""%%1""" /f
+reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%cd%\icon_doc_st.ico" /f
+reg add "HKCR\sublime_text_file\shell\open\command" /ve /d "%cd%\subl.exe ""%%1""" /f
 FOR /F "eol=;" %%e IN (ext.txt) DO (
 	REM ECHO %%e
 	reg query "HKCR\.%%e" > NUL || reg add "HKCR\.%%e" /f
@@ -113,24 +109,15 @@ FOR /F "eol=;" %%e IN (ext.txt) DO (
 ECHO.
 ECHO Done: remove file associations
 ECHO.
-GOTO BEGIN
+GOTO begin
 
 
 :change_program_icon
-ResHacker.exe -addoverwrite "sublime_text.exe", "sublime_text.exe", "icon_program.ico", ICONGROUP, MAINICON, 0
-@DEL /F ResHacker.ini
-@DEL /F ResHacker.log
+ResHacker.exe -addoverwrite "sublime_text.exe", "sublime_text.exe", "icon_program_st.ico", ICONGROUP, MAINICON, 0
 REM try to clean icon cache
-@ie4uinit.exe -ClearIconCache
-@DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db
+ie4uinit.exe -ClearIconCache 2>NUL
+DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db 2>NUL
 ECHO.
 ECHO Done: change the icon of sublime_text.exe
 ECHO.
-GOTO BEGIN
-
-
-:get_last_arg
-  SET "LAST_ARG=%~1"
-  SHIFT
-  IF NOT "%~1"=="" GOTO get_last_arg
-GOTO :EOF
+GOTO begin
