@@ -48,7 +48,7 @@ GOTO begin
 REM for files
 reg add "HKCR\*\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
 reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
-reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%1""" /f
+reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
 REM for directories
 reg add "HKCR\Directory\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
 reg add "HKCR\Directory\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
