@@ -10,14 +10,14 @@ ECHO.
 ECHO   Operations:
 ECHO   1: Add "Open with Sublime Text" to context menu (icon_menu_st.ico)
 ECHO   2: Remove "Open with Sublime Text" from context menu
-ECHO   3: Add file associations (ext.txt, icon_doc_st.ico)
+ECHO   3: Add file associations (ext_st.txt, icon_doc_st.ico)
 ECHO   4: Remove file associations
 ECHO   5: Change the icon of sublime_text.exe (icon_program_st.ico)
 ECHO   6: Exit
 ECHO.
 ECHO   Some notes:
 ECHO   1. Put this .exe file with sublime_text.exe.
-ECHO   2. Write file exetensions in ext.txt line by line
+ECHO   2. Write file exetensions in ext_st.txt line by line
 ECHO.
 ECHO ------------------------------------------------------------------------------
 ECHO.
@@ -80,7 +80,7 @@ GOTO begin
 reg add "HKCR\sublime_text_file" /ve /d "Sublime Text file" /f
 reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%cd%\icon_doc_st.ico" /f
 reg add "HKCR\sublime_text_file\shell\open\command" /ve /d "%cd%\sublime_text.exe ""%%1""" /f
-FOR /F "eol=;" %%e IN (ext.txt) DO (
+FOR /F "eol=;" %%e IN (ext_st.txt) DO (
 	REM ECHO %%e
 	reg query "HKCR\.%%e" > NUL || reg add "HKCR\.%%e" /f
 	FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /ve') DO (
@@ -98,7 +98,7 @@ GOTO begin
 
 :un_sublime_text_file
 reg delete "HKCR\sublime_text_file" /f
-FOR /F "eol=;" %%e IN (ext.txt) DO (
+FOR /F "eol=;" %%e IN (ext_st.txt) DO (
 	REM ECHO %%e
 	reg query "HKCR\.%%e" /v "sublime_text_backup" > NUL || reg add "HKCR\.%%e" /ve /f
 	FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /v "sublime_text_backup"') DO (
