@@ -6,7 +6,7 @@ SET COMPILER=Bat To Exe Converter\Bat_To_Exe_Converter.exe
 SET INPUT_BASENAME=Sublime-Merge-Portable-Tool
 SET DESC=A portable tool for Sublime Merge
 SET ICON=icon_menu_sm.ico
-SET VERSION=1.0.7.0
+SET VERSION=1.1.0.0
 SET GITHUB_REPO=https://github.com/jfcherng/Sublime-Portable-Tool
 
 CD /D src
