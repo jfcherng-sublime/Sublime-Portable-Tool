@@ -2,7 +2,7 @@
 TITLE Sublime Merge Portable Tool
 SET PATH=%TEMP%;%PATH%
 
-SET VERSION=v1.0.4
+SET VERSION=v1.0.5
 ECHO.
 ECHO Sublime Merge Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
