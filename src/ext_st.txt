@@ -1,7 +1,29 @@
 ; a leading semicolon will comment the line
 
+; Sublime Text
+gutter-theme
+hidden-tmLanguage
+sublime-build
+sublime-color-scheme
+sublime-commands
+sublime-completions
+sublime-keymap
+sublime-macro
+sublime-menu
+sublime-mousemap
+sublime-project
+sublime-settings
+sublime-snippet
+sublime-syntax
+sublime-theme
+sublime-workspace
+tmLanguage
+tmPreferences
+tmTheme
+
 ; C/C++
 c
+cc
 cpp
 h
 hpp
@@ -40,28 +62,37 @@ scs
 spi
 
 ; Shell script
-sh
+bash
 csh
+ksh
+sh
 tcsh
+zsh
 
 ; Text
 md
 rst
-;txt
 ;ini
 
 ; Web
 ;html
 ;htm
 erb
+twig
 sass
 scss
 css
 js
 xml
+yml
+yaml
+neon
 json
 php
+phpt
 sql
+rb
+bbcode
 
 ;py
 conf
