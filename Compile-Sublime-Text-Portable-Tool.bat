@@ -6,10 +6,25 @@ SET COMPILER=Bat To Exe Converter\Bat_To_Exe_Converter.exe
 SET INPUT_BASENAME=Sublime-Text-Portable-Tool
 SET DESC=A portable tool for Sublime Text
 SET ICON=icon_menu_st.ico
-SET VERSION=1.1.0.0
+SET AUTHOR=Jack Cherng ^<jfcherng@gmail.com^>
 SET GITHUB_REPO=https://github.com/jfcherng/Sublime-Portable-Tool
+SET VERSION_TMP_FILE=version_st.log
 
 CD /D src
+
+:: get the version number from the .bat file
+rg.exe ^
+    --only-matching ^
+    --no-line-number ^
+    --regexp "v[0-9]+\.[0-9]+\.[0-9]+" ^
+    "%INPUT_BASENAME%.bat" ^
+    > %VERSION_TMP_FILE%
+
+SET /P VERSION= < %VERSION_TMP_FILE%
+:: strip leading "v" and append ".0"
+SET VERSION=%VERSION:~1%.0
+
+ECHO Version: %VERSION%
 
 "%COMPILER%" ^
     /bat "%INPUT_BASENAME%.bat" ^
@@ -20,7 +35,7 @@ CD /D src
     /productversion "%VERSION%" ^
     /fileversion "%VERSION%" ^
     /description "%DESC%" ^
-    /copyright "%GITHUB_REPO%" ^
+    /copyright "%AUTHOR% %GITHUB_REPO%" ^
     /workdir 0 ^
     /extractdir 1 ^
     /upx ^
@@ -28,5 +43,7 @@ CD /D src
     /overwrite ^
     /deleteonexit
 
-PAUSE >NUL
+DEL /F /A %VERSION_TMP_FILE% 2>NUL
+
+PAUSE
 EXIT
