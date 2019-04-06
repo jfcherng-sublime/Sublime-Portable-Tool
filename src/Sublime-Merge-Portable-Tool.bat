@@ -45,9 +45,9 @@ reg add "HKCR\Directory\shell\Sublime Merge" /ve /d "Open with Sublime Merge" /f
 reg add "HKCR\Directory\shell\Sublime Merge" /v "Icon" /d "%CD%\icon_menu_sm.ico" /f
 reg add "HKCR\Directory\shell\Sublime Merge\command" /ve /d "%CD%\smerge.exe ""%%1""" /f
 REM for directories background
-REM reg add "HKCR\Directory\Background\shell\Sublime Merge" /ve /d "Open with Sublime Merge" /f
-REM reg add "HKCR\Directory\Background\shell\Sublime Merge" /v "Icon" /d "%CD%\icon_menu_sm.ico" /f
-REM reg add "HKCR\Directory\Background\shell\Sublime Merge\command" /ve /d "%CD%\smerge.exe ""%%1""" /f
+reg add "HKCR\Directory\Background\shell\Sublime Merge" /ve /d "Open with Sublime Merge" /f
+reg add "HKCR\Directory\Background\shell\Sublime Merge" /v "Icon" /d "%CD%\icon_menu_sm.ico" /f
+reg add "HKCR\Directory\Background\shell\Sublime Merge\command" /ve /d "%CD%\smerge.exe ""%%V""" /f
 ECHO.
 ECHO Done: add "Open with Sublime Merge" to context menu
 ECHO.
