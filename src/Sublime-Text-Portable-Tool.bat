@@ -3,7 +3,7 @@ TITLE Sublime Text Portable Tool
 SET PATH=%b2eincfilepath%;%PATH%
 
 SET VERSION=v1.1.0
-ECHO.
+
 ECHO Sublime Merge Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
 ECHO.
@@ -45,15 +45,15 @@ GOTO begin
 
 
 :regMenu
-REM for files
+:: for files
 reg add "HKCR\*\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
 reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
 reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
-REM for directories
+:: for directories
 reg add "HKCR\Directory\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
 reg add "HKCR\Directory\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
 reg add "HKCR\Directory\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%1""" /f
-REM for directories background
+:: for directories background
 reg add "HKCR\Directory\Background\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
 reg add "HKCR\Directory\Background\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
 reg add "HKCR\Directory\Background\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%V""" /f
@@ -64,11 +64,11 @@ GOTO begin
 
 
 :unregMenu
-REM for files
+:: for files
 reg delete "HKCR\*\shell\Sublime Text" /f
-REM for directories
+:: for directories
 reg delete "HKCR\Directory\shell\Sublime Text" /f
-REM for directories background
+:: for directories background
 reg delete "HKCR\Directory\Background\shell\Sublime Text" /f
 ECHO.
 ECHO Done: remove "Open with Sublime Text" from context menu
@@ -81,14 +81,14 @@ reg add "HKCR\sublime_text_file" /ve /d "Sublime Text file" /f
 reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%cd%\icon_doc_st.ico" /f
 reg add "HKCR\sublime_text_file\shell\open\command" /ve /d "%cd%\sublime_text.exe ""%%1""" /f
 FOR /F "eol=;" %%e IN (ext_st.txt) DO (
-	REM ECHO %%e
-	reg query "HKCR\.%%e" > NUL || reg add "HKCR\.%%e" /f
-	FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /ve') DO (
-		IF NOT "%%c" == "sublime_text_file" (
-			reg add "HKCR\.%%e" /v "sublime_text_backup" /d "%%c" /f
-		)
-	)
-	assoc .%%e=sublime_text_file
+    :: ECHO %%e
+    reg query "HKCR\.%%e" > NUL || reg add "HKCR\.%%e" /f
+    FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /ve') DO (
+        IF NOT "%%c" == "sublime_text_file" (
+            reg add "HKCR\.%%e" /v "sublime_text_backup" /d "%%c" /f
+        )
+    )
+    assoc .%%e=sublime_text_file
 )
 ECHO.
 ECHO Done: add file associations
@@ -99,12 +99,12 @@ GOTO begin
 :un_sublime_text_file
 reg delete "HKCR\sublime_text_file" /f
 FOR /F "eol=;" %%e IN (ext_st.txt) DO (
-	REM ECHO %%e
-	reg query "HKCR\.%%e" /v "sublime_text_backup" > NUL || reg add "HKCR\.%%e" /ve /f
-	FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /v "sublime_text_backup"') DO (
-		reg add "HKCR\.%%e" /ve /d "%%c" /f
-		reg delete "HKCR\.%%e" /V "sublime_text_backup" /f
-	)
+    :: ECHO %%e
+    reg query "HKCR\.%%e" /v "sublime_text_backup" > NUL || reg add "HKCR\.%%e" /ve /f
+    FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /v "sublime_text_backup"') DO (
+        reg add "HKCR\.%%e" /ve /d "%%c" /f
+        reg delete "HKCR\.%%e" /V "sublime_text_backup" /f
+    )
 )
 ECHO.
 ECHO Done: remove file associations
@@ -114,7 +114,7 @@ GOTO begin
 
 :change_program_icon
 ResourceHacker.exe -addoverwrite "sublime_text.exe", "sublime_text.exe", "icon_program_st.ico", ICONGROUP, MAINICON, 0
-REM try to clean icon cache
+:: try to clean icon cache
 ie4uinit.exe -ClearIconCache 2>NUL
 DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db 2>NUL
 ECHO.

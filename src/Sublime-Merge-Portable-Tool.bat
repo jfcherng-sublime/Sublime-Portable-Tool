@@ -3,7 +3,7 @@ TITLE Sublime Merge Portable Tool
 SET PATH=%b2eincfilepath%;%PATH%
 
 SET VERSION=v1.1.0
-ECHO.
+
 ECHO Sublime Merge Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
 ECHO.
@@ -40,11 +40,11 @@ GOTO begin
 
 
 :regMenu
-REM for directories
+:: for directories
 reg add "HKCR\Directory\shell\Sublime Merge" /ve /d "Open with Sublime Merge" /f
 reg add "HKCR\Directory\shell\Sublime Merge" /v "Icon" /d "%CD%\icon_menu_sm.ico" /f
 reg add "HKCR\Directory\shell\Sublime Merge\command" /ve /d "%CD%\smerge.exe ""%%1""" /f
-REM for directories background
+:: for directories background
 reg add "HKCR\Directory\Background\shell\Sublime Merge" /ve /d "Open with Sublime Merge" /f
 reg add "HKCR\Directory\Background\shell\Sublime Merge" /v "Icon" /d "%CD%\icon_menu_sm.ico" /f
 reg add "HKCR\Directory\Background\shell\Sublime Merge\command" /ve /d "%CD%\smerge.exe ""%%V""" /f
@@ -55,9 +55,9 @@ GOTO begin
 
 
 :unregMenu
-REM for directories
+:: for directories
 reg delete "HKCR\Directory\shell\Sublime Merge" /f
-REM for directories background
+:: for directories background
 reg delete "HKCR\Directory\Background\shell\Sublime Merge" /f
 ECHO.
 ECHO Done: remove "Open with Sublime Merge" from context menu
@@ -67,7 +67,7 @@ GOTO begin
 
 :change_program_icon
 ResourceHacker.exe -addoverwrite "sublime_merge.exe", "sublime_merge.exe", "icon_program_sm.ico", ICONGROUP, MAINICON, 0
-REM try to clean icon cache
+:: try to clean icon cache
 ie4uinit.exe -ClearIconCache 2>NUL
 DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db 2>NUL
 ECHO.
