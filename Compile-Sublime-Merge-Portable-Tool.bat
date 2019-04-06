@@ -14,7 +14,7 @@ CD /D src
 "%COMPILER%" ^
     /bat "%INPUT_BASENAME%.bat" ^
     /exe "%SCRIPT_DIR%\%INPUT_BASENAME%.exe" ^
-    /include "ResHacker.exe" ^
+    /include "ResourceHacker.exe" ^
     /icon "%ICON%" ^
     /productname "%INPUT_BASENAME%" ^
     /productversion "%VERSION%" ^
