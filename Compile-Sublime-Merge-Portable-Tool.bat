@@ -29,7 +29,7 @@ ECHO Version: %VERSION%
 "%SCRIPT_DIR%\bin\Bat_To_Exe_Converter.exe" ^
     /bat "%INPUT_BASENAME%.bat" ^
     /exe "%SCRIPT_DIR%\%INPUT_BASENAME%.exe" ^
-    /include "ResourceHacker.exe" ^
+    /include "rcedit.exe" ^
     /icon "%ICON%" ^
     /productname "%INPUT_BASENAME%" ^
     /productversion "%VERSION%" ^

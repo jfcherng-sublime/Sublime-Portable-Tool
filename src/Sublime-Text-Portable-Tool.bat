@@ -113,7 +113,7 @@ GOTO begin
 
 
 :change_program_icon
-ResourceHacker.exe -addoverwrite "sublime_text.exe", "sublime_text.exe", "icon_program_st.ico", ICONGROUP, MAINICON, 0
+rcedit.exe "sublime_text.exe" --set-icon "icon_program_st.ico"
 :: try to clean icon cache
 ie4uinit.exe -ClearIconCache 2>NUL
 DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db 2>NUL
