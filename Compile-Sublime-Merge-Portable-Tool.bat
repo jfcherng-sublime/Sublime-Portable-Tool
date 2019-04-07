@@ -13,7 +13,7 @@ SET VERSION_TMP_FILE=version_sm.log
 CD /D src
 
 :: get the version number from the .bat file
-rg.exe ^
+"%SCRIPT_DIR%\bin\rg.exe" ^
     --only-matching ^
     --no-line-number ^
     --regexp "v[0-9]+\.[0-9]+\.[0-9]+" ^
@@ -26,7 +26,7 @@ SET VERSION=%VERSION:~1%.0
 
 ECHO Version: %VERSION%
 
-"%COMPILER%" ^
+"%SCRIPT_DIR%\bin\Bat To Exe Converter\Bat_To_Exe_Converter.exe" ^
     /bat "%INPUT_BASENAME%.bat" ^
     /exe "%SCRIPT_DIR%\%INPUT_BASENAME%.exe" ^
     /include "ResourceHacker.exe" ^
