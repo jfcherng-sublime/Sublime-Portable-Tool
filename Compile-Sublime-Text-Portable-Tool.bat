@@ -25,7 +25,7 @@ SET VERSION=%VERSION:~1%.0
 
 ECHO Version: %VERSION%
 
-"%SCRIPT_DIR%\bin\Bat To Exe Converter\Bat_To_Exe_Converter.exe" ^
+"%SCRIPT_DIR%\bin\Bat_To_Exe_Converter.exe" ^
     /bat "%INPUT_BASENAME%.bat" ^
     /exe "%SCRIPT_DIR%\%INPUT_BASENAME%.exe" ^
     /include "ResourceHacker.exe" ^
