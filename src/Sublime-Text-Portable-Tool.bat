@@ -4,7 +4,7 @@ SET PATH=%b2eincfilepath%;%PATH%
 
 SET VERSION=v1.1.0
 
-ECHO Sublime Merge Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
+ECHO Sublime Text Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
 ECHO.
 ECHO   Operations:
