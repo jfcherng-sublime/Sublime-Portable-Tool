@@ -2,7 +2,7 @@
 TITLE Sublime Text Portable Tool
 SET PATH=%b2eincfilepath%;%PATH%
 
-SET VERSION=v1.1.0
+SET VERSION=v1.1.1
 
 ECHO Sublime Text Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
