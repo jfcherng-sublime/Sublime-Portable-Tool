@@ -1,0 +1,13 @@
+# EditorConfig is awesome: https://EditorConfig.org
+# top-most EditorConfig file
+root = true
+
+[*]
+insert_final_newline = true
+
+[*.bat]
+indent_style = space
+indent_size = 4
+
+[*.md]
+indent_style = space
