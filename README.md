@@ -10,7 +10,7 @@ This tool is developed to manage the context menu, file icons and file associati
 To compile this project, you need the following things.
 
 - [Bat To Exe Converter](http://www.f2ko.de/en/b2e.php)
-- [Resource Hacker](http://www.angusj.com/resourcehacker) (I use v3.6 for a smaller size.)
+- [electron/rcedit](https://github.com/electron/rcedit)
 
 To compile, just run
 
