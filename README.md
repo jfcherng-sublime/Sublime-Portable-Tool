@@ -9,8 +9,8 @@ This tool is developed to manage the context menu, file icons and file associati
 
 To compile this project, you need the following things.
 
-- [Bat To Exe Converter](http://www.f2ko.de/en/b2e.php)
-- [electron/rcedit](https://github.com/electron/rcedit)
+- [Bat To Exe Converter](http://www.f2ko.de/en/b2e.php) (Freeware)
+- [electron/rcedit](https://github.com/electron/rcedit) (MIT license)
 
 To compile, just run
 
