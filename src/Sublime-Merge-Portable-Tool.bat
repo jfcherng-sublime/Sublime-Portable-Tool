@@ -24,7 +24,7 @@ ECHO.
 IF EXIST "sublime_merge.exe" (
     GOTO prepareFiles
 ) ELSE (
-    ECHO I cannot find your sublime_merge.exe... :/
+    ECHO I cannot find your "sublime_merge.exe"... :/
     PAUSE >NUL
     EXIT
 )

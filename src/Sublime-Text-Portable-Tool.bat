@@ -27,7 +27,7 @@ ECHO.
 IF EXIST "sublime_text.exe" (
     GOTO prepareFiles
 ) ELSE (
-    ECHO I cannot find your sublime_text.exe... :/
+    ECHO I cannot find your "sublime_text.exe"... :/
     PAUSE >NUL
     EXIT
 )
@@ -88,10 +88,17 @@ GOTO begin
 
 
 :sublime_text_file
+IF NOT EXIST "ext_st.txt" (
+    ECHO.
+    ECHO Cannot find "ext_st.txt"...
+    ECHO.
+    GOTO begin
+)
+
 reg add "HKCR\sublime_text_file" /ve /d "Sublime Text file" /f
 reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%cd%\icon_doc_st.ico" /f
 reg add "HKCR\sublime_text_file\shell\open\command" /ve /d "%cd%\sublime_text.exe ""%%1""" /f
-FOR /F "eol=;" %%e IN (ext_st.txt) DO (
+FOR /F "eol=;" %%e IN ("ext_st.txt") DO (
     :: ECHO %%e
     reg query "HKCR\.%%e" > NUL || reg add "HKCR\.%%e" /f
     FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /ve') DO (
@@ -108,8 +115,15 @@ GOTO begin
 
 
 :un_sublime_text_file
+IF NOT EXIST "ext_st.txt" (
+    ECHO.
+    ECHO Cannot find "ext_st.txt"...
+    ECHO.
+    GOTO begin
+)
+
 reg delete "HKCR\sublime_text_file" /f
-FOR /F "eol=;" %%e IN (ext_st.txt) DO (
+FOR /F "eol=;" %%e IN ("ext_st.txt") DO (
     :: ECHO %%e
     reg query "HKCR\.%%e" /v "sublime_text_backup" > NUL || reg add "HKCR\.%%e" /ve /f
     FOR /f "skip=2 tokens=1,2,* delims= " %%a IN ('reg query "HKCR\.%%e" /v "sublime_text_backup"') DO (
