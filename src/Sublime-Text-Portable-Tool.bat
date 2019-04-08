@@ -25,12 +25,23 @@ ECHO.
 
 :check_sublime_text_exist
 IF EXIST "sublime_text.exe" (
-    GOTO begin
+    GOTO prepareFiles
 ) ELSE (
     ECHO I cannot find your sublime_text.exe... :/
     PAUSE >NUL
     EXIT
 )
+
+
+:prepareFiles
+FOR %%f IN (
+    "icon_doc_st.ico"
+    "icon_menu_st.ico"
+    "icon_program_st.ico"
+) DO (
+    IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
+)
+GOTO begin
 
 
 :begin

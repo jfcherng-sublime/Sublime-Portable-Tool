@@ -22,12 +22,22 @@ ECHO.
 
 :check_sublime_merge_exist
 IF EXIST "sublime_merge.exe" (
-    GOTO begin
+    GOTO prepareFiles
 ) ELSE (
     ECHO I cannot find your sublime_merge.exe... :/
     PAUSE >NUL
     EXIT
 )
+
+
+:prepareFiles
+FOR %%f IN (
+    "icon_menu_sm.ico"
+    "icon_program_sm.ico"
+) DO (
+    IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
+)
+GOTO begin
 
 
 :begin

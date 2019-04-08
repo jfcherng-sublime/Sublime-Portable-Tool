@@ -28,6 +28,9 @@ ECHO Version: %VERSION%
 "%SCRIPT_DIR%\bin\Bat_To_Exe_Converter.exe" ^
     /bat "%INPUT_BASENAME%.bat" ^
     /exe "%SCRIPT_DIR%\%INPUT_BASENAME%.exe" ^
+    /include "icon_doc_st.ico" ^
+    /include "icon_menu_st.ico" ^
+    /include "icon_program_st.ico" ^
     /include "rcedit.exe" ^
     /icon "%ICON%" ^
     /productname "%INPUT_BASENAME%" ^
