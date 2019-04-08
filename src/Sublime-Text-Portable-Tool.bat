@@ -4,15 +4,19 @@ SET PATH=%b2eincfilepath%;%PATH%
 
 SET VERSION=v1.2.0
 
+SET FILE_ICON_MENU=icon_menu_st.ico
+SET FILE_ICON_ASSOCIATED=icon_associated_st.ico
+SET FILE_ICON_EXECUTABLE=icon_executable_st.ico
+
 ECHO Sublime Text Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
 ECHO.
 ECHO   Operations:
-ECHO   1: Add "Open with Sublime Text" to context menu (icon_menu_st.ico)
+ECHO   1: Add "Open with Sublime Text" to context menu (%FILE_ICON_MENU%)
 ECHO   2: Remove "Open with Sublime Text" from context menu
-ECHO   3: Add file associations (ext_st.txt, icon_doc_st.ico)
+ECHO   3: Add file associations (ext_st.txt, %FILE_ICON_ASSOCIATED%)
 ECHO   4: Remove file associations
-ECHO   5: Change the icon of sublime_text.exe (icon_program_st.ico)
+ECHO   5: Change the icon of sublime_text.exe (%FILE_ICON_EXECUTABLE%)
 ECHO   6: Exit
 ECHO.
 ECHO   Some notes:
@@ -27,7 +31,7 @@ ECHO.
 IF EXIST "sublime_text.exe" (
     GOTO prepareFiles
 ) ELSE (
-    ECHO I cannot find your "sublime_text.exe"... :/
+    ECHO Cannot find "sublime_text.exe"...
     PAUSE >NUL
     EXIT
 )
@@ -35,9 +39,9 @@ IF EXIST "sublime_text.exe" (
 
 :prepareFiles
 FOR %%f IN (
-    "icon_doc_st.ico"
-    "icon_menu_st.ico"
-    "icon_program_st.ico"
+    "%FILE_ICON_ASSOCIATED%"
+    "%FILE_ICON_EXECUTABLE%"
+    "%FILE_ICON_MENU%"
 ) DO (
     IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
 )
@@ -58,15 +62,15 @@ GOTO begin
 :regMenu
 :: for files
 reg add "HKCR\*\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
-reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
+reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
 reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
 :: for directories
 reg add "HKCR\Directory\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
-reg add "HKCR\Directory\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
+reg add "HKCR\Directory\shell\Sublime Text" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
 reg add "HKCR\Directory\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%1""" /f
 :: for directories background
 reg add "HKCR\Directory\Background\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
-reg add "HKCR\Directory\Background\shell\Sublime Text" /v "Icon" /d "%CD%\icon_menu_st.ico" /f
+reg add "HKCR\Directory\Background\shell\Sublime Text" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
 reg add "HKCR\Directory\Background\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%V""" /f
 ECHO.
 ECHO Done: add "Open with Sublime Text" to context menu
@@ -96,7 +100,7 @@ IF NOT EXIST "ext_st.txt" (
 )
 
 reg add "HKCR\sublime_text_file" /ve /d "Sublime Text file" /f
-reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%cd%\icon_doc_st.ico" /f
+reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%cd%\%FILE_ICON_ASSOCIATED%" /f
 reg add "HKCR\sublime_text_file\shell\open\command" /ve /d "%cd%\sublime_text.exe ""%%1""" /f
 FOR /F "eol=;" %%e IN ("ext_st.txt") DO (
     :: ECHO %%e
@@ -138,7 +142,7 @@ GOTO begin
 
 
 :change_program_icon
-rcedit.exe "sublime_text.exe" --set-icon "icon_program_st.ico"
+rcedit.exe "sublime_text.exe" --set-icon "%FILE_ICON_EXECUTABLE%"
 :: try to clean icon cache
 ie4uinit.exe -ClearIconCache 2>NUL
 DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db 2>NUL

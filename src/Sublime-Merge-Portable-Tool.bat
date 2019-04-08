@@ -4,13 +4,16 @@ SET PATH=%b2eincfilepath%;%PATH%
 
 SET VERSION=v1.2.0
 
+SET FILE_ICON_MENU=icon_menu_sm.ico
+SET FILE_ICON_EXECUTABLE=icon_executable_sm.ico
+
 ECHO Sublime Merge Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
 ECHO.
 ECHO   Operations:
-ECHO   1: Add "Open with Sublime Merge" to context menu (icon_menu_sm.ico)
+ECHO   1: Add "Open with Sublime Merge" to context menu (%FILE_ICON_MENU%)
 ECHO   2: Remove "Open with Sublime Merge" from context menu
-ECHO   5: Change the icon of sublime_merge.exe (icon_program_sm.ico)
+ECHO   5: Change the icon of sublime_merge.exe (%FILE_ICON_EXECUTABLE%)
 ECHO   6: Exit
 ECHO.
 ECHO   Some notes:
@@ -24,7 +27,7 @@ ECHO.
 IF EXIST "sublime_merge.exe" (
     GOTO prepareFiles
 ) ELSE (
-    ECHO I cannot find your "sublime_merge.exe"... :/
+    ECHO Cannot find "sublime_merge.exe"...
     PAUSE >NUL
     EXIT
 )
@@ -32,8 +35,8 @@ IF EXIST "sublime_merge.exe" (
 
 :prepareFiles
 FOR %%f IN (
-    "icon_menu_sm.ico"
-    "icon_program_sm.ico"
+    "%FILE_ICON_EXECUTABLE%"
+    "%FILE_ICON_MENU%"
 ) DO (
     IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
 )
@@ -52,11 +55,11 @@ GOTO begin
 :regMenu
 :: for directories
 reg add "HKCR\Directory\shell\Sublime Merge" /ve /d "Open with Sublime Merge" /f
-reg add "HKCR\Directory\shell\Sublime Merge" /v "Icon" /d "%CD%\icon_menu_sm.ico" /f
+reg add "HKCR\Directory\shell\Sublime Merge" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
 reg add "HKCR\Directory\shell\Sublime Merge\command" /ve /d "%CD%\smerge.exe ""%%1""" /f
 :: for directories background
 reg add "HKCR\Directory\Background\shell\Sublime Merge" /ve /d "Open with Sublime Merge" /f
-reg add "HKCR\Directory\Background\shell\Sublime Merge" /v "Icon" /d "%CD%\icon_menu_sm.ico" /f
+reg add "HKCR\Directory\Background\shell\Sublime Merge" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
 reg add "HKCR\Directory\Background\shell\Sublime Merge\command" /ve /d "%CD%\smerge.exe ""%%V""" /f
 ECHO.
 ECHO Done: add "Open with Sublime Merge" to context menu
@@ -76,7 +79,7 @@ GOTO begin
 
 
 :change_program_icon
-rcedit.exe "sublime_merge.exe" --set-icon "icon_program_sm.ico"
+rcedit.exe "sublime_merge.exe" --set-icon "%FILE_ICON_EXECUTABLE%"
 :: try to clean icon cache
 ie4uinit.exe -ClearIconCache 2>NUL
 DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db 2>NUL
