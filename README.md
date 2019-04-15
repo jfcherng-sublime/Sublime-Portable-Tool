@@ -7,6 +7,9 @@ This tool is developed to manage the context menu, file icons and file associati
 
 ## Compilation
 
+There are pre-built binaries in the [Releases](https://github.com/jfcherng/Sublime-Portable-Tool/releases) page,
+but if you want to build them by yourself, you can follow instructions below.
+
 To compile this project, you need the following things.
 
 - [Bat To Exe Converter](http://www.f2ko.de/en/b2e.php) (Freeware)
