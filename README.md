@@ -11,9 +11,11 @@ There are pre-built binaries in the [Releases](https://github.com/jfcherng/Subli
 but if you want to build them by yourself, you can follow instructions below.
 
 To compile this project, you need the following things.
+(The binaries in this repo may not be the latest as they are bloated in the functional aspect.)
 
 - [Bat To Exe Converter](http://www.f2ko.de/en/b2e.php) (Freeware)
 - [electron/rcedit](https://github.com/electron/rcedit) (MIT license)
+- [ripgrep](https://github.com/BurntSushi/ripgrep) (Unlicense license)
 
 To compile, just run
 
