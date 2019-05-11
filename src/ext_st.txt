@@ -83,10 +83,13 @@ sass
 scss
 css
 js
+vue
+jsx
 xml
 yml
 yaml
 neon
+toml
 json
 php
 phpt
