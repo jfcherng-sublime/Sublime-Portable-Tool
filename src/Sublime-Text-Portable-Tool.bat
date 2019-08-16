@@ -8,6 +8,11 @@ SET FILE_ICON_MENU=icon_menu_st.ico
 SET FILE_ICON_ASSOCIATED=icon_associated_st.ico
 SET FILE_ICON_EXECUTABLE=icon_executable_st.ico
 
+:: used as a proxy to subl.exe for hijacking notepad.exe?
+IF /I [%1] == ["C:\Windows\system32\NOTEPAD.EXE"] GOTO debuggerProxy
+
+
+:menu
 ECHO Sublime Text Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
 ECHO.
@@ -16,8 +21,10 @@ ECHO   1: Add "Open with Sublime Text" to context menu (%FILE_ICON_MENU%)
 ECHO   2: Remove "Open with Sublime Text" from context menu
 ECHO   3: Add file associations (ext_st.txt, %FILE_ICON_ASSOCIATED%)
 ECHO   4: Remove file associations
-ECHO   5: Change the icon of sublime_text.exe (%FILE_ICON_EXECUTABLE%)
-ECHO   6: Exit
+ECHO   5: Set Sublime Text as the default text editor (hijack notepad.exe)
+ECHO   6: Restore notepad.exe as the default text editor
+ECHO   7: Change the icon of sublime_text.exe (%FILE_ICON_EXECUTABLE%)
+ECHO   8: Exit
 ECHO.
 ECHO   Some notes:
 ECHO   1. Put this .exe file with sublime_text.exe.
@@ -54,8 +61,10 @@ IF "%u%" == "1" GOTO regMenu
 IF "%u%" == "2" GOTO unregMenu
 IF "%u%" == "3" GOTO sublime_text_file
 IF "%u%" == "4" GOTO un_sublime_text_file
-IF "%u%" == "5" GOTO change_program_icon
-IF "%u%" == "6" EXIT
+IF "%u%" == "5" GOTO set_sublime_default_editor
+IF "%u%" == "6" GOTO unset_sublime_default_editor
+IF "%u%" == "7" GOTO change_program_icon
+IF "%u%" == "8" EXIT
 GOTO begin
 
 
@@ -141,6 +150,23 @@ ECHO.
 GOTO begin
 
 
+:set_sublime_default_editor
+:: set self-executable to be the proxy (Debugger)
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "%CD%\%~nx0" /f
+ECHO.
+ECHO Done: set Sublime Text as the default text editor
+ECHO.
+GOTO begin
+
+
+:unset_sublime_default_editor
+reg delete "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /f
+ECHO.
+ECHO Done: use notepad.exe as the default text editor
+ECHO.
+GOTO begin
+
+
 :change_program_icon
 rcedit.exe "sublime_text.exe" --set-icon "%FILE_ICON_EXECUTABLE%"
 :: try to clean icon cache
@@ -150,3 +176,18 @@ ECHO.
 ECHO Done: change the icon of sublime_text.exe
 ECHO.
 GOTO begin
+
+
+:debuggerProxy
+SET _tail=%*
+:: get everything after %1 as _tail
+CALL SET _tail=%%_tail:*%1=%%
+:: the first char must be an extra space so remove it
+SET _tail=%_tail:~1%
+
+ECHO Used as notepad.exe debugger...
+ECHO.
+ECHO %_tail%
+ECHO.
+"%~dp0\sublime_text.exe" "%_tail%"
+EXIT
