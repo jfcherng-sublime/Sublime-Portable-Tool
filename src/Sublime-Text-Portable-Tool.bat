@@ -100,8 +100,8 @@ IF NOT EXIST "ext_st.txt" (
 )
 
 reg add "HKCR\sublime_text_file" /ve /d "Sublime Text file" /f
-reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%cd%\%FILE_ICON_ASSOCIATED%" /f
-reg add "HKCR\sublime_text_file\shell\open\command" /ve /d "%cd%\sublime_text.exe ""%%1""" /f
+reg add "HKCR\sublime_text_file\DefaultIcon" /ve /d "%CD%\%FILE_ICON_ASSOCIATED%" /f
+reg add "HKCR\sublime_text_file\shell\open\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
 FOR /F "eol=;" %%e IN (ext_st.txt) DO (
     :: ECHO %%e
     reg query "HKCR\.%%e" > NUL || reg add "HKCR\.%%e" /f
