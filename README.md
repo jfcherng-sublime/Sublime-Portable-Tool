@@ -1,5 +1,11 @@
 # Sublime Text/Merge Portable Tool
 
+<a href="https://github.com/jfcherng/Sublime-Text-Portable-Tool/releases"><img alt="GitHub All Releases" src="https://img.shields.io/github/downloads/jfcherng/Sublime-Text-Portable-Tool/total?logo=github"></a>
+<a href="https://github.com/jfcherng/Sublime-Text-Portable-Tool/tags"><img alt="GitHub tag (latest SemVer)" src="https://img.shields.io/github/tag/jfcherng/Sublime-Text-Portable-Tool?logo=github"></a>
+<a href="https://github.com/jfcherng/Sublime-Text-Portable-Tool/blob/master/LICENSE"><img alt="Project license" src="https://img.shields.io/github/license/jfcherng/Sublime-Text-Portable-Tool?logo=github"></a>
+<a href="https://github.com/jfcherng/Sublime-Text-Portable-Tool/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/jfcherng/Sublime-Text-Portable-Tool?logo=github"></a>
+<a href="https://www.paypal.me/jfcherng/5usd" title="Donate to this project using Paypal"><img src="https://img.shields.io/badge/paypal-donate-blue.svg?logo=paypal" /></a>
+
 This tool is developed to manage the context menu, file icons and file associations for Sublime Text/Merge under Windows.
 
 ![](https://raw.githubusercontent.com/jfcherng/Sublime-Text-Portable-Tool/gh-pages/images/interface.png)
