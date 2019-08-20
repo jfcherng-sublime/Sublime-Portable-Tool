@@ -31,6 +31,7 @@ ECHO Version: %VERSION%
     /include "icon_associated_st.ico" ^
     /include "icon_executable_st.ico" ^
     /include "icon_menu_st.ico" ^
+    /include "SublimeLauncher.exe" ^
     /include "rcedit.exe" ^
     /icon "%ICON%" ^
     /productname "%INPUT_BASENAME%" ^

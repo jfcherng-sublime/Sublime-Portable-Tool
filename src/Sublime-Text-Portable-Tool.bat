@@ -7,9 +7,7 @@ SET VERSION=v1.4.0
 SET FILE_ICON_MENU=icon_menu_st.ico
 SET FILE_ICON_ASSOCIATED=icon_associated_st.ico
 SET FILE_ICON_EXECUTABLE=icon_executable_st.ico
-
-:: used as a proxy to subl.exe for hijacking notepad.exe?
-IF /I [%1] == ["C:\Windows\system32\NOTEPAD.EXE"] GOTO debuggerProxy
+SET FILE_SUBLIME_LAUNCHER=SublimeLauncher.exe
 
 
 :menu
@@ -49,6 +47,7 @@ FOR %%f IN (
     "%FILE_ICON_ASSOCIATED%"
     "%FILE_ICON_EXECUTABLE%"
     "%FILE_ICON_MENU%"
+    "%FILE_SUBLIME_LAUNCHER%"
 ) DO (
     IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
 )
@@ -152,7 +151,7 @@ GOTO begin
 
 :set_sublime_default_editor
 :: set self-executable to be the proxy (Debugger)
-reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "%CD%\%~nx0" /f
+reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution Options\notepad.exe" /v "Debugger" /t REG_SZ /d "\"%CD%\SublimeLauncher.exe\" -z" /f
 ECHO.
 ECHO Done: set Sublime Text as the default text editor
 ECHO.
@@ -176,18 +175,3 @@ ECHO.
 ECHO Done: change the icon of sublime_text.exe
 ECHO.
 GOTO begin
-
-
-:debuggerProxy
-SET _tail=%*
-:: get everything after %1 as _tail
-CALL SET _tail=%%_tail:*%1=%%
-:: the first char must be an extra space so remove it
-SET _tail=%_tail:~1%
-
-ECHO Used as notepad.exe debugger...
-ECHO.
-ECHO %_tail%
-ECHO.
-"%~dp0\sublime_text.exe" "%_tail%"
-EXIT

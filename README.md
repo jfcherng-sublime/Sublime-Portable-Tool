@@ -22,6 +22,7 @@ To compile this project, you need the following things.
 - [Bat To Exe Converter](http://www.f2ko.de/en/b2e.php) (Freeware)
 - [electron/rcedit](https://github.com/electron/rcedit) (MIT license)
 - [ripgrep](https://github.com/BurntSushi/ripgrep) (Unlicense license)
+- [Sublime-Notepad-Replacement](https://github.com/grumpydev/Sublime-Notepad-Replacement) (No license)
 
 To compile, just run
 
