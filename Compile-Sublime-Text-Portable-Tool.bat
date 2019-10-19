@@ -48,5 +48,5 @@ ECHO Version: %VERSION%
 
 DEL /F /A %VERSION_TMP_FILE% 2>NUL
 
-PAUSE
+IF NOT "%1" == "autoclose" PAUSE
 EXIT
