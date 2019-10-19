@@ -1,0 +1,38 @@
+os: Visual Studio 2019
+clone_depth: 5
+install:
+  - SET REPODIR=%CD%
+  - SET PATH=%REPODIR\bin%;%PATH%
+  # get the current git short hash
+  - git rev-parse --short HEAD > hash.txt
+  - SET /P GIT_HASH= < hash.txt
+before_build:
+  - ECHO Git hash = %GIT_HASH%
+  - CD /d "%REPODIR%"
+  # change dev version "-dev" to the current commit hash
+  - sed -i"" -e "s/-dev/-%GIT_HASH%/g" "src\Sublime-Merge-Portable-Tool.bat"
+  - sed -i"" -e "s/-dev/-%GIT_HASH%/g" "src\Sublime-Text-Portable-Tool.bat"
+build_script:
+  - CD /d "%REPODIR%"
+  - CALL "Compile-Sublime-Merge-Portable-Tool.bat" autoclose
+  - CALL "Compile-Sublime-Text-Portable-Tool.bat" autoclose
+after_build:
+  - CD /d "%REPODIR%"
+  - mv "Sublime-Merge-Portable-Tool.exe" "Sublime-Merge-Portable-Tool-%GIT_HASH%.exe"
+  - mv "Sublime-Text-Portable-Tool.exe" "Sublime-Text-Portable-Tool-%GIT_HASH%.exe"
+artifacts:
+  - path: "Sublime-Merge-Portable-Tool-%GIT_HASH%.exe"
+  - path: "Sublime-Text-Portable-Tool-%GIT_HASH%.exe"
+# deploy:
+#   release: $(GIT_HASH)
+#   description: "Auto built from the master branch"
+#   provider: GitHub
+#   auth_token:
+#     # your encrypted token from GitHub
+#     secure: s9uw2NujMMtddlR5nLNRnwiTHhHLhuUsPL3w4PLbucCNBS9EQKBXBY4JfuMcUCZL
+#   artifact: output-$(GIT_HASH).zip
+#   draft: false
+#   prerelease: false
+#   on:
+#     # release from master branch only
+#     branch: master
