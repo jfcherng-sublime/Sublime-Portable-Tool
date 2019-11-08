@@ -7,21 +7,6 @@ SET VERSION=v1.4.2-dev
 SET FILE_ICON_MENU=icon_menu_sm.ico
 SET FILE_ICON_EXECUTABLE=icon_executable_sm.ico
 
-ECHO Sublime Merge Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
-ECHO ------------------------------------------------------------------------------
-ECHO.
-ECHO   Operations:
-ECHO   1: Add "Open with Sublime Merge" to context menu (%FILE_ICON_MENU%)
-ECHO   2: Remove "Open with Sublime Merge" from context menu
-ECHO   5: Change the icon of sublime_merge.exe (%FILE_ICON_EXECUTABLE%)
-ECHO   6: Exit
-ECHO.
-ECHO   Some notes:
-ECHO   1. Put this .exe file with sublime_merge.exe.
-ECHO.
-ECHO ------------------------------------------------------------------------------
-ECHO.
-
 
 :check_sublime_merge_exist
 IF EXIST "sublime_merge.exe" (
@@ -40,7 +25,24 @@ FOR %%f IN (
 ) DO (
     IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
 )
-GOTO begin
+GOTO menu
+
+
+:menu
+ECHO Sublime Merge Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
+ECHO ------------------------------------------------------------------------------
+ECHO.
+ECHO   Operations:
+ECHO   1: Add "Open with Sublime Merge" to context menu (%FILE_ICON_MENU%)
+ECHO   2: Remove "Open with Sublime Merge" from context menu
+ECHO   5: Change the icon of sublime_merge.exe (%FILE_ICON_EXECUTABLE%)
+ECHO   6: Exit
+ECHO.
+ECHO   Some notes:
+ECHO   1. Put this .exe file with sublime_merge.exe.
+ECHO.
+ECHO ------------------------------------------------------------------------------
+ECHO.
 
 
 :begin
@@ -64,7 +66,7 @@ reg add "HKCR\Directory\Background\shell\Sublime Merge\command" /ve /d "%CD%\sme
 ECHO.
 ECHO Done: add "Open with Sublime Merge" to context menu
 ECHO.
-GOTO begin
+GOTO menu
 
 
 :unregMenu
@@ -75,7 +77,7 @@ reg delete "HKCR\Directory\Background\shell\Sublime Merge" /f
 ECHO.
 ECHO Done: remove "Open with Sublime Merge" from context menu
 ECHO.
-GOTO begin
+GOTO menu
 
 
 :change_program_icon
@@ -86,4 +88,4 @@ DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db 2>NUL
 ECHO.
 ECHO Done: change the icon of sublime_merge.exe
 ECHO.
-GOTO begin
+GOTO menu

@@ -10,6 +10,28 @@ SET FILE_ICON_EXECUTABLE=icon_executable_st.ico
 SET FILE_SUBLIME_LAUNCHER=SublimeLauncher.exe
 
 
+:check_sublime_text_exist
+IF EXIST "sublime_text.exe" (
+    GOTO prepareFiles
+) ELSE (
+    ECHO Cannot find "sublime_text.exe"...
+    PAUSE >NUL
+    EXIT
+)
+
+
+:prepareFiles
+FOR %%f IN (
+    "%FILE_ICON_ASSOCIATED%"
+    "%FILE_ICON_EXECUTABLE%"
+    "%FILE_ICON_MENU%"
+    "%FILE_SUBLIME_LAUNCHER%"
+) DO (
+    IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
+)
+GOTO menu
+
+
 :menu
 ECHO Sublime Text Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
@@ -30,28 +52,6 @@ ECHO   2. Write file exetensions in ext_st.txt line by line
 ECHO.
 ECHO ------------------------------------------------------------------------------
 ECHO.
-
-
-:check_sublime_text_exist
-IF EXIST "sublime_text.exe" (
-    GOTO prepareFiles
-) ELSE (
-    ECHO Cannot find "sublime_text.exe"...
-    PAUSE >NUL
-    EXIT
-)
-
-
-:prepareFiles
-FOR %%f IN (
-    "%FILE_ICON_ASSOCIATED%"
-    "%FILE_ICON_EXECUTABLE%"
-    "%FILE_ICON_MENU%"
-    "%FILE_SUBLIME_LAUNCHER%"
-) DO (
-    IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
-)
-GOTO begin
 
 
 :begin
@@ -83,7 +83,7 @@ reg add "HKCR\Directory\Background\shell\Sublime Text\command" /ve /d "%CD%\subl
 ECHO.
 ECHO Done: add "Open with Sublime Text" to context menu
 ECHO.
-GOTO begin
+GOTO menu
 
 
 :unregMenu
@@ -96,7 +96,7 @@ reg delete "HKCR\Directory\Background\shell\Sublime Text" /f
 ECHO.
 ECHO Done: remove "Open with Sublime Text" from context menu
 ECHO.
-GOTO begin
+GOTO menu
 
 
 :sublime_text_file
@@ -104,7 +104,7 @@ IF NOT EXIST "ext_st.txt" (
     ECHO.
     ECHO Cannot find "ext_st.txt"...
     ECHO.
-    GOTO begin
+    GOTO menu
 )
 
 reg add "HKCR\sublime_text_file" /ve /d "Sublime Text file" /f
@@ -123,7 +123,7 @@ FOR /F "eol=;" %%e IN (ext_st.txt) DO (
 ECHO.
 ECHO Done: add file associations
 ECHO.
-GOTO begin
+GOTO menu
 
 
 :un_sublime_text_file
@@ -131,7 +131,7 @@ IF NOT EXIST "ext_st.txt" (
     ECHO.
     ECHO Cannot find "ext_st.txt"...
     ECHO.
-    GOTO begin
+    GOTO menu
 )
 
 reg delete "HKCR\sublime_text_file" /f
@@ -146,7 +146,7 @@ FOR /F "eol=;" %%e IN (ext_st.txt) DO (
 ECHO.
 ECHO Done: remove file associations
 ECHO.
-GOTO begin
+GOTO menu
 
 
 :set_sublime_default_editor
@@ -155,7 +155,7 @@ reg add "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Execution 
 ECHO.
 ECHO Done: set Sublime Text as the default text editor
 ECHO.
-GOTO begin
+GOTO menu
 
 
 :unset_sublime_default_editor
@@ -163,7 +163,7 @@ reg delete "HKLM\Software\Microsoft\Windows NT\CurrentVersion\Image File Executi
 ECHO.
 ECHO Done: use notepad.exe as the default text editor
 ECHO.
-GOTO begin
+GOTO menu
 
 
 :change_program_icon
@@ -174,4 +174,4 @@ DEL /F /A %USERPROFILE%\AppData\Local\IconCache.db 2>NUL
 ECHO.
 ECHO Done: change the icon of sublime_text.exe
 ECHO.
-GOTO begin
+GOTO menu
