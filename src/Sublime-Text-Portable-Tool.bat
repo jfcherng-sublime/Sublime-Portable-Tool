@@ -4,7 +4,6 @@ SET PATH=%b2eincfilepath%;%PATH%
 
 SET VERSION=v1.4.3-dev
 
-SET FILE_ICON_MENU=icon_menu_st.ico
 SET FILE_ICON_ASSOCIATED=icon_associated_st.ico
 SET FILE_ICON_EXECUTABLE=icon_executable_st.ico
 SET FILE_SUBLIME_LAUNCHER=SublimeLauncher.exe
@@ -24,7 +23,6 @@ IF EXIST "sublime_text.exe" (
 FOR %%f IN (
     "%FILE_ICON_ASSOCIATED%"
     "%FILE_ICON_EXECUTABLE%"
-    "%FILE_ICON_MENU%"
     "%FILE_SUBLIME_LAUNCHER%"
 ) DO (
     IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
@@ -37,7 +35,7 @@ ECHO Sublime Text Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
 ECHO.
 ECHO   Operations:
-ECHO   1: Add "Open with Sublime Text" to context menu (%FILE_ICON_MENU%)
+ECHO   1: Add "Open with Sublime Text" to context menu
 ECHO   2: Remove "Open with Sublime Text" from context menu
 ECHO   3: Add file associations (ext_st.txt, %FILE_ICON_ASSOCIATED%)
 ECHO   4: Remove file associations
@@ -70,15 +68,15 @@ GOTO begin
 :regMenu
 :: for files
 reg add "HKCR\*\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
-reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
+reg add "HKCR\*\shell\Sublime Text" /v "Icon" /d "%CD%\sublime_text.exe,0" /f
 reg add "HKCR\*\shell\Sublime Text\command" /ve /d "%CD%\sublime_text.exe ""%%1""" /f
 :: for directories
 reg add "HKCR\Directory\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
-reg add "HKCR\Directory\shell\Sublime Text" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
+reg add "HKCR\Directory\shell\Sublime Text" /v "Icon" /d "%CD%\sublime_text.exe,0" /f
 reg add "HKCR\Directory\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%1""" /f
 :: for directories background
 reg add "HKCR\Directory\Background\shell\Sublime Text" /ve /d "Open with Sublime Text" /f
-reg add "HKCR\Directory\Background\shell\Sublime Text" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
+reg add "HKCR\Directory\Background\shell\Sublime Text" /v "Icon" /d "%CD%\sublime_text.exe,0" /f
 reg add "HKCR\Directory\Background\shell\Sublime Text\command" /ve /d "%CD%\subl.exe ""%%V""" /f
 ECHO.
 ECHO Done: add "Open with Sublime Text" to context menu

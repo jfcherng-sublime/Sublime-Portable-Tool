@@ -4,7 +4,6 @@ SET PATH=%b2eincfilepath%;%PATH%
 
 SET VERSION=v1.4.3-dev
 
-SET FILE_ICON_MENU=icon_menu_sm.ico
 SET FILE_ICON_EXECUTABLE=icon_executable_sm.ico
 
 
@@ -21,7 +20,6 @@ IF EXIST "sublime_merge.exe" (
 :prepareFiles
 FOR %%f IN (
     "%FILE_ICON_EXECUTABLE%"
-    "%FILE_ICON_MENU%"
 ) DO (
     IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
 )
@@ -33,7 +31,7 @@ ECHO Sublime Merge Portable Tool %VERSION% by Jack Cherng ^<jfcherng@gmail.com^>
 ECHO ------------------------------------------------------------------------------
 ECHO.
 ECHO   Operations:
-ECHO   1: Add "Open with Sublime Merge" to context menu (%FILE_ICON_MENU%)
+ECHO   1: Add "Open with Sublime Merge" to context menu
 ECHO   2: Remove "Open with Sublime Merge" from context menu
 ECHO   5: Change the icon of sublime_merge.exe (%FILE_ICON_EXECUTABLE%)
 ECHO   6: Exit
@@ -57,11 +55,11 @@ GOTO begin
 :regMenu
 :: for directories
 reg add "HKCR\Directory\shell\Sublime Merge" /ve /d "Open with Sublime Merge" /f
-reg add "HKCR\Directory\shell\Sublime Merge" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
+reg add "HKCR\Directory\shell\Sublime Merge" /v "Icon" /d "%CD%\sublime_merge.exe,0" /f
 reg add "HKCR\Directory\shell\Sublime Merge\command" /ve /d "%CD%\smerge.exe ""%%1""" /f
 :: for directories background
 reg add "HKCR\Directory\Background\shell\Sublime Merge" /ve /d "Open with Sublime Merge" /f
-reg add "HKCR\Directory\Background\shell\Sublime Merge" /v "Icon" /d "%CD%\%FILE_ICON_MENU%" /f
+reg add "HKCR\Directory\Background\shell\Sublime Merge" /v "Icon" /d "%CD%\sublime_merge.exe,0" /f
 reg add "HKCR\Directory\Background\shell\Sublime Merge\command" /ve /d "%CD%\smerge.exe ""%%V""" /f
 ECHO.
 ECHO Done: add "Open with Sublime Merge" to context menu

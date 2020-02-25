@@ -4,7 +4,7 @@ SET SCRIPT_DIR=%CD%
 
 SET INPUT_BASENAME=Sublime-Text-Portable-Tool
 SET DESC=A portable tool for Sublime Text
-SET ICON=icon_menu_st.ico
+SET ICON=icons\sublime_text.ico
 SET AUTHOR=Jack Cherng ^<jfcherng@gmail.com^>
 SET GITHUB_REPO=https://github.com/jfcherng/Sublime-Portable-Tool
 SET VERSION_TMP_FILE=version_st.log
@@ -30,7 +30,6 @@ ECHO Version: %VERSION%
     /exe "%SCRIPT_DIR%\%INPUT_BASENAME%.exe" ^
     /include "icon_associated_st.ico" ^
     /include "icon_executable_st.ico" ^
-    /include "icon_menu_st.ico" ^
     /include "SublimeLauncher.exe" ^
     /include "rcedit.exe" ^
     /icon "%ICON%" ^

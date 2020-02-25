@@ -5,7 +5,7 @@ SET SCRIPT_DIR=%CD%
 SET COMPILER=Bat To Exe Converter\Bat_To_Exe_Converter.exe
 SET INPUT_BASENAME=Sublime-Merge-Portable-Tool
 SET DESC=A portable tool for Sublime Merge
-SET ICON=icon_menu_sm.ico
+SET ICON=icons\sublime_merge.ico
 SET AUTHOR=Jack Cherng ^<jfcherng@gmail.com^>
 SET GITHUB_REPO=https://github.com/jfcherng/Sublime-Portable-Tool
 SET VERSION_TMP_FILE=version_sm.log
@@ -30,7 +30,6 @@ ECHO Version: %VERSION%
     /bat "%INPUT_BASENAME%.bat" ^
     /exe "%SCRIPT_DIR%\%INPUT_BASENAME%.exe" ^
     /include "icon_executable_sm.ico" ^
-    /include "icon_menu_sm.ico" ^
     /include "rcedit.exe" ^
     /icon "%ICON%" ^
     /productname "%INPUT_BASENAME%" ^
