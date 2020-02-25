@@ -2,7 +2,7 @@
 TITLE Sublime Text Portable Tool
 SET PATH=%b2eincfilepath%;%PATH%
 
-SET VERSION=v1.4.3-dev
+SET VERSION=v1.4.3
 
 SET FILE_ICON_ASSOCIATED=icon_associated_st.ico
 SET FILE_ICON_EXECUTABLE=icon_executable_st.ico
