@@ -1,11 +1,11 @@
 # Sublime Text/Merge Portable Tool
 
-[![AppVeyor branch](https://ci.appveyor.com/project/jfcherng/sublime-portable-tool)](https://img.shields.io/appveyor/ci/jfcherng/Sublime-Portable-Tool/master?style=flat-square&logo=appveyor)
-[![GitHub All Releases](https://github.com/jfcherng/Sublime-Text-Portable-Tool/releases)](https://img.shields.io/github/downloads/jfcherng/Sublime-Text-Portable-Tool/total?style=flat-square&logo=github)
-[![GitHub tag (latest SemVer)](https://github.com/jfcherng/Sublime-Text-Portable-Tool/tags)](https://img.shields.io/github/tag/jfcherng/Sublime-Text-Portable-Tool?style=flat-square&logo=github)
-[![Project license](https://github.com/jfcherng/Sublime-Text-Portable-Tool/blob/master/LICENSE)](https://img.shields.io/github/license/jfcherng/Sublime-Text-Portable-Tool?style=flat-square&logo=github)
-[![GitHub stars](https://github.com/jfcherng/Sublime-Text-Portable-Tool/stargazers)](https://img.shields.io/github/stars/jfcherng/Sublime-Text-Portable-Tool?style=flat-square&logo=github)
-[![Donate to this project using Paypal](https://www.paypal.me/jfcherng/5usd)](https://img.shields.io/badge/paypal-donate-blue.svg?style=flat-square&logo=paypal)
+[![AppVeyor branch](https://img.shields.io/appveyor/ci/jfcherng/Sublime-Portable-Tool/master?style=flat-square&logo=appveyor)](https://ci.appveyor.com/project/jfcherng/sublime-portable-tool)
+[![GitHub All Releases](https://img.shields.io/github/downloads/jfcherng/Sublime-Text-Portable-Tool/total?style=flat-square&logo=github)](https://github.com/jfcherng/Sublime-Text-Portable-Tool/releases)
+[![GitHub tag (latest SemVer)](https://img.shields.io/github/tag/jfcherng/Sublime-Text-Portable-Tool?style=flat-square&logo=github)](https://github.com/jfcherng/Sublime-Text-Portable-Tool/tags)
+[![Project license](https://img.shields.io/github/license/jfcherng/Sublime-Text-Portable-Tool?style=flat-square&logo=github)](https://github.com/jfcherng/Sublime-Text-Portable-Tool/blob/master/LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/jfcherng/Sublime-Text-Portable-Tool?style=flat-square&logo=github)](https://github.com/jfcherng/Sublime-Text-Portable-Tool/stargazers)
+[![Donate to this project using Paypal](https://img.shields.io/badge/paypal-donate-blue.svg?style=flat-square&logo=paypal)](https://www.paypal.me/jfcherng/5usd)
 
 This tool is developed to manage the context menu, file icons,
 file associations for Sublime Text/Merge under Windows.
