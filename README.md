@@ -21,7 +21,8 @@ Take `Sublime-Text-Portable-Tool.exe` as the example.
 For `Sublime-Merge-Portable-Tool.exe`, steps are quite the same.
 
 1. Put `Sublime-Text-Portable-Tool.exe` along with the `sublime_text.exe`,
-   whose default location is under `C:\Program Files\Sublime Text 3`.
+   whose default locations are under `C:\Program Files\Sublime Text 3` (ST 3)
+   or `C:\Program Files\Sublime Text` (ST 4).
 1. Execute `Sublime-Text-Portable-Tool.exe`.
 1. Just enter the number for what you want to do as listed in the menu.
 
