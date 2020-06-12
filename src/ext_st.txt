@@ -2,7 +2,9 @@
 
 ; Sublime Text
 gutter-theme
+hidden-color-scheme
 hidden-tmLanguage
+stTheme
 sublime-build
 sublime-color-scheme
 sublime-commands
@@ -21,6 +23,10 @@ tmLanguage
 tmPreferences
 tmTheme
 
+; ???
+patch
+diff
+
 ; C/C++
 c
 cc
@@ -28,6 +34,8 @@ cpp
 h
 hpp
 hxx
+ui
+qml
 
 ; R
 R
@@ -49,6 +57,7 @@ tex
 ; Verilog
 v
 vh
+sv
 tcl
 setup
 
@@ -79,12 +88,14 @@ rst
 ;htm
 erb
 twig
+less
 sass
 scss
 css
 js
 vue
 jsx
+pug
 xml
 yml
 yaml
@@ -105,3 +116,4 @@ tpl
 srt
 ssa
 ass
+vtt
