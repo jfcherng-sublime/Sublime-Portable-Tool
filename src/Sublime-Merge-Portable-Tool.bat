@@ -2,7 +2,7 @@
 TITLE Sublime Merge Portable Tool
 SET PATH=%b2eincfilepath%;%PATH%
 
-SET VERSION=v1.4.4
+SET VERSION=v1.4.5-dev
 
 SET FILE_ICON_EXECUTABLE=icon_executable_sm.ico
 
