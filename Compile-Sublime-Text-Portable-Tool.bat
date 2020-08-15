@@ -30,8 +30,9 @@ ECHO Version: %VERSION%
     /exe "%SCRIPT_DIR%\%INPUT_BASENAME%.exe" ^
     /include "icon_associated_st.ico" ^
     /include "icon_executable_st.ico" ^
-    /include "SublimeLauncher.exe" ^
+    /include "elevate.exe" ^
     /include "rcedit.exe" ^
+    /include "SublimeLauncher.exe" ^
     /icon "%ICON%" ^
     /productname "%INPUT_BASENAME%" ^
     /productversion "%VERSION%" ^

@@ -30,6 +30,7 @@ ECHO Version: %VERSION%
     /bat "%INPUT_BASENAME%.bat" ^
     /exe "%SCRIPT_DIR%\%INPUT_BASENAME%.exe" ^
     /include "icon_executable_sm.ico" ^
+    /include "elevate.exe" ^
     /include "rcedit.exe" ^
     /icon "%ICON%" ^
     /productname "%INPUT_BASENAME%" ^

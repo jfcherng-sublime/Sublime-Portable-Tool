@@ -6,7 +6,6 @@ SET VERSION=v1.4.4-dev
 
 SET FILE_ICON_ASSOCIATED=icon_associated_st.ico
 SET FILE_ICON_EXECUTABLE=icon_executable_st.ico
-SET FILE_SUBLIME_LAUNCHER=SublimeLauncher.exe
 
 
 :check_sublime_text_exist
@@ -23,7 +22,9 @@ IF EXIST "sublime_text.exe" (
 FOR %%f IN (
     "%FILE_ICON_ASSOCIATED%"
     "%FILE_ICON_EXECUTABLE%"
-    "%FILE_SUBLIME_LAUNCHER%"
+    "elevate.exe"
+    "rcedit.exe"
+    "SublimeLauncher.exe"
 ) DO (
     IF NOT EXIST "%%f" copy "%b2eincfilepath%\%%f" . >NUL
 )
@@ -36,13 +37,14 @@ ECHO ---------------------------------------------------------------------------
 ECHO.
 ECHO   Operations:
 ECHO   1: Add "Open with Sublime Text" to context menu
-ECHO   2: Remove "Open with Sublime Text" from context menu
-ECHO   3: Add file associations (ext_st.txt, %FILE_ICON_ASSOCIATED%)
-ECHO   4: Remove file associations
-ECHO   5: Set Sublime Text as the default text editor (hijack notepad.exe)
-ECHO   6: Restore notepad.exe as the default text editor
-ECHO   7: Change the icon of sublime_text.exe (%FILE_ICON_EXECUTABLE%)
-ECHO   8: Exit
+ECHO   2: Add "Open with Sublime Text (Admin)" to context menu
+ECHO   3: Remove all "Open with Sublime Text" from context menus
+ECHO   4: Add file associations (ext_st.txt, %FILE_ICON_ASSOCIATED%)
+ECHO   5: Remove file associations
+ECHO   6: Set Sublime Text as the default text editor (hijack notepad.exe)
+ECHO   7: Restore notepad.exe as the default text editor
+ECHO   8: Change the icon of sublime_text.exe (%FILE_ICON_EXECUTABLE%)
+ECHO   9: Exit
 ECHO.
 ECHO   Some notes:
 ECHO   1. Put this .exe file with sublime_text.exe.
@@ -55,13 +57,14 @@ ECHO.
 :begin
 SET /p u="What are you going to do? "
 IF "%u%" == "1" GOTO regMenu
-IF "%u%" == "2" GOTO unregMenu
-IF "%u%" == "3" GOTO sublime_text_file
-IF "%u%" == "4" GOTO un_sublime_text_file
-IF "%u%" == "5" GOTO set_sublime_default_editor
-IF "%u%" == "6" GOTO unset_sublime_default_editor
-IF "%u%" == "7" GOTO change_program_icon
-IF "%u%" == "8" EXIT
+IF "%u%" == "2" GOTO regMenuAdmin
+IF "%u%" == "3" GOTO unregMenuAll
+IF "%u%" == "4" GOTO sublime_text_file
+IF "%u%" == "5" GOTO un_sublime_text_file
+IF "%u%" == "6" GOTO set_sublime_default_editor
+IF "%u%" == "7" GOTO unset_sublime_default_editor
+IF "%u%" == "8" GOTO change_program_icon
+IF "%u%" == "9" EXIT
 GOTO begin
 
 
@@ -84,15 +87,27 @@ ECHO.
 GOTO menu
 
 
-:unregMenu
+:regMenuAdmin
+:: for files
+reg add "HKCR\*\shell\Sublime Text (Admin)" /ve /d "Open with Sublime Text (Admin)" /f
+reg add "HKCR\*\shell\Sublime Text (Admin)" /v "Icon" /d "%CD%\sublime_text.exe,0" /f
+reg add "HKCR\*\shell\Sublime Text (Admin)\command" /ve /d "%CD%\elevate.exe """%CD%\sublime_text.exe""" --multiinstance ""%%1""" /f
+ECHO.
+ECHO Done: add "Open with Sublime Text (Admin)" to context menu
+ECHO.
+GOTO menu
+
+
+:unregMenuAll
 :: for files
 reg delete "HKCR\*\shell\Sublime Text" /f
+reg delete "HKCR\*\shell\Sublime Text (Admin)" /f
 :: for directories
 reg delete "HKCR\Directory\shell\Sublime Text" /f
 :: for directories background
 reg delete "HKCR\Directory\Background\shell\Sublime Text" /f
 ECHO.
-ECHO Done: remove "Open with Sublime Text" from context menu
+ECHO Done: remove all "Open with Sublime Text" from context menus
 ECHO.
 GOTO menu
 
