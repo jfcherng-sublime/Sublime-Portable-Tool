@@ -46,7 +46,7 @@ But if you want to build them by yourself, you can follow instructions below.
 
 To compile this project, you need the following things.
 
-- [Bat To Exe Converter](http://www.f2ko.de/en/b2e.php) (Freeware)
+- [Bat To Exe Converter](https://f2ko.de/programme/bat-to-exe-converter) (Freeware)
 - [electron/rcedit](https://github.com/electron/rcedit) (MIT license)
 - [elevate](http://code.kliu.org/misc/elevate/) (No license)
 - [ripgrep](https://github.com/BurntSushi/ripgrep) (Unlicense license)
